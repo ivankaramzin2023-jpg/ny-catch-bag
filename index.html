@@ -8,7 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#7bb5e8">
     <title>Новогодняя Игра — Мешок Деда Мороза (LB Bonus)</title>
-    <link rel="stylesheet" href="style.css?v=4.2.0">
+    <link rel="stylesheet" href="style.css?v=4.4.0">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Oranienbaum&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,900&display=swap" media="print" onload="this.media='all'">
@@ -18,9 +18,9 @@
 </head>
 <body>
     <div id="gameContainer">
-        <!-- Universal Triple Backgrounds: Sky, Rules & Game Background -->
+        <!-- Universal Backgrounds: Sky, Fir Tree & Game Background (Clean 1:1 from Match 3) -->
         <img id="bgSky" src="assets/01_cover_bg.webp" class="figma-bg-sky" alt="Фон неба">
-        <img id="bgRules" src="assets/rules_clean_bg.webp" class="figma-bg-sky figma-bg-rules" alt="Фон правил">
+        <img id="bgFirTree" src="assets/rules_fir_tree.webp" class="rules-fir-tree" alt="Елка">
         <img id="bgGame" src="assets/game_bg.webp" class="figma-bg-sky figma-bg-game" alt="Фон игры">
 
         <!-- Dynamic Falling Snow Canvas -->
@@ -168,40 +168,36 @@
             </div>
         </div>
 
-        <!-- SCREEN 5: Финальный экран (СПАСИБО ЗА ВИЗИТ! 1:1 ПО МАКЕТУ) -->
-        <div id="finalScreen" class="final-screen-container hidden">
-            <!-- Аутентичный полноэкранный фон (небо) -->
-            <img src="assets/01_cover_bg.webp" class="final-screen-full-bg" alt="">
-
+        <!-- SCREEN 5: Финальный экран (СПАСИБО ЗА ВИЗИТ! 1:1 из Match 3) -->
+        <div id="finalScreen" class="exit-screen-container hidden">
             <!-- Верхняя праздничная лента "СПАСИБО ЗА ВИЗИТ!" -->
-            <div class="final-top-box">
-                <img src="assets/final_title_banner.webp" class="final-ribbon-banner" alt="Спасибо за визит!">
+            <div class="exit-ribbon-wrapper">
+                <img src="assets/exit_title_banner.webp" class="exit-ribbon-banner" alt="Спасибо за визит!">
             </div>
 
-            <!-- Персонаж: Дед Мороз с картой LB и мешком блюд + Аутентичное свечение сзади -->
-            <div class="final-santa-wrapper">
-                <div class="final-santa-container">
-                    <img src="assets/final_santa_glow.webp" class="final-santa-glow" alt="">
-                    <img src="assets/final_santa_card.webp" class="final-santa-img" alt="Дед Мороз с картой LB Бонус">
-                </div>
+            <!-- Дед Мороз с картой LB и мягким сиянием сзади -->
+            <div class="exit-santa-wrapper">
+                <div class="santa-glow-circle"></div>
+                <img src="assets/final_santa_card.webp" class="exit-santa-img" alt="Дед Мороз с картой LB Бонус">
             </div>
 
-            <!-- Нижняя снежная плашка 1:1 с текстами и кнопкой "ВЫЙТИ" -->
-            <div class="final-bottom-plate-box">
-                <img src="assets/final_plate.webp" class="final-plate-bg" alt="Снежная плашка">
-                <div class="final-plate-content">
-                    <div class="final-text-group">
-                        <img src="assets/final_heading.webp" class="final-heading-img" alt="Бонусы уже на карте лояльности! Ждем вас снова!">
-                        <img src="assets/final_subheading.webp" class="final-subheading-img" alt="Играйте и получайте бонусы. Каждый визит в ресторан открывает следующую игру">
+            <!-- Ледяная плашка лояльности 1:1 по макету -->
+            <div class="exit-card-box">
+                <img src="assets/exit_card_clean.webp" class="exit-card-bg" alt="Ледяная плашка">
+                <div class="exit-card-content">
+                    <div class="exit-text-group">
+                        <h2 class="exit-heading">Бонусы уже на карте<br>лояльности!<br>Ждем вас снова!</h2>
+                        <p class="exit-subheading">Играйте и получайте бонусы. Каждый визит в ресторан открывает следующую игру</p>
+                        <p class="exit-footnote">Списывайте до 20% от стоимости заказа в любом проекте LB Бонус до 31.01</p>
                     </div>
-                    <button id="btnFinalExit" class="final-exit-btn" type="button" aria-label="ВЫЙТИ">
-                        <img src="assets/final_btn_exit.webp" class="final-btn-exit-img" alt="ВЫЙТИ">
+                    <button id="btnFinalExit" class="exit-btn-quit" type="button" aria-label="ВЫЙТИ">
+                        <img src="assets/exit_btn_quit.webp" class="exit-btn-quit-img" alt="ВЫЙТИ">
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="game.js?v=3.2.0"></script>
+    <script src="game.js?v=4.4.0"></script>
 </body>
 </html>

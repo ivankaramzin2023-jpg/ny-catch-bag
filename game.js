@@ -906,7 +906,8 @@
                 startScreen: document.getElementById('startScreen'),
                 rulesScreen: document.getElementById('rulesScreen'),
                 hud: document.getElementById('hud'),
-                bgRules: document.getElementById('bgRules'),
+                bgSky: document.getElementById('bgSky'),
+                bgFirTree: document.getElementById('bgFirTree'),
                 bgGame: document.getElementById('bgGame'),
                 countdownOverlay: document.getElementById('countdownOverlay'),
                 cnt3: document.getElementById('cnt3'),
@@ -954,6 +955,33 @@
                 this.dom.rulesStartBtn.addEventListener('click', () => this.startCountdown());
             }
 
+            // Клик по точкам пагинации правил (1:1 из Match 3)
+            if (this.dom.rulesPagination) {
+                const dots = this.dom.rulesPagination.querySelectorAll('.pagination-dot');
+                dots.forEach((dot, idx) => {
+                    dot.addEventListener('click', () => this.showRuleSlide(idx));
+                });
+            }
+
+            // Поддержка свайпа карточки правил пальцем (1:1 из Match 3)
+            if (this.dom.rulesCardSlot) {
+                let touchRulesX = 0;
+                this.dom.rulesCardSlot.addEventListener('touchstart', e => {
+                    touchRulesX = e.touches[0].clientX;
+                }, { passive: true });
+
+                this.dom.rulesCardSlot.addEventListener('touchend', e => {
+                    const diff = touchRulesX - e.changedTouches[0].clientX;
+                    if (Math.abs(diff) > 40) {
+                        if (diff > 0 && this.currentRuleIndex < this.totalRules - 1) {
+                            this.showRuleSlide(this.currentRuleIndex + 1);
+                        } else if (diff < 0 && this.currentRuleIndex > 0) {
+                            this.showRuleSlide(this.currentRuleIndex - 1);
+                        }
+                    }
+                }, { passive: true });
+            }
+
             // Кнопка "ПОПРОБОВАТЬ ЕЩЕ РАЗ" перезапускает игру
             if (this.dom.btnRetryGame) {
                 this.dom.btnRetryGame.addEventListener('click', () => {
@@ -976,6 +1004,9 @@
                     }
                     if (this.dom.resultScreen) {
                         this.dom.resultScreen.classList.add('hidden');
+                    }
+                    if (this.dom.bgFirTree) {
+                        this.dom.bgFirTree.classList.remove('hidden');
                     }
                     if (this.dom.finalScreen) {
                         this.dom.finalScreen.classList.remove('hidden');
@@ -1056,30 +1087,39 @@
 
         goToRules() {
             this.dom.startScreen.classList.add('hidden');
-            this.dom.bgRules.classList.add('active');
+            if (this.dom.bgFirTree) {
+                this.dom.bgFirTree.classList.remove('hidden');
+            }
             this.dom.rulesScreen.classList.remove('hidden');
             this.showRuleSlide(0);
         }
 
         showRuleSlide(index) {
+            if (index < 0 || index >= RULES_DATA.length) return;
             this.currentRuleIndex = index;
             const data = RULES_DATA[index];
-            if (!data) return;
 
-            this.dom.rulesCardSlot.innerHTML = `<img src="${data.src}" class="rules-card-img" alt="${data.alt}">`;
+            if (this.dom.rulesCardSlot) {
+                const existingImg = this.dom.rulesCardSlot.querySelector('.rules-card-img');
+                if (!existingImg || existingImg.getAttribute('src') !== data.src) {
+                    this.dom.rulesCardSlot.innerHTML = `<img src="${data.src}" class="rules-card-img" alt="${data.alt}">`;
+                }
+            }
 
-            const dots = this.dom.rulesPagination.querySelectorAll('.pagination-dot');
-            dots.forEach((dot, i) => {
-                if (i === index) dot.classList.add('active');
-                else dot.classList.remove('active');
-            });
+            if (this.dom.rulesPagination) {
+                const dots = this.dom.rulesPagination.querySelectorAll('.pagination-dot');
+                dots.forEach((dot, i) => {
+                    if (i === index) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+            }
 
             if (index === this.totalRules - 1) {
-                this.dom.dualButtonsGroup.classList.add('hidden');
-                this.dom.singleStartGroup.classList.remove('hidden');
+                if (this.dom.dualButtonsGroup) this.dom.dualButtonsGroup.classList.add('hidden');
+                if (this.dom.singleStartGroup) this.dom.singleStartGroup.classList.remove('hidden');
             } else {
-                this.dom.dualButtonsGroup.classList.remove('hidden');
-                this.dom.singleStartGroup.classList.add('hidden');
+                if (this.dom.dualButtonsGroup) this.dom.dualButtonsGroup.classList.remove('hidden');
+                if (this.dom.singleStartGroup) this.dom.singleStartGroup.classList.add('hidden');
             }
         }
 
@@ -1094,7 +1134,9 @@
             if (this.dom.finalScreen) {
                 this.dom.finalScreen.classList.add('hidden');
             }
-            this.dom.bgRules.classList.remove('active');
+            if (this.dom.bgFirTree) {
+                this.dom.bgFirTree.classList.add('hidden');
+            }
             this.dom.bgGame.classList.add('active');
 
             // Количество оставшихся попыток (1 сердце = 1 попытка)
@@ -1195,6 +1237,12 @@
             // Скрываем HUD и активируем экран результатов
             if (this.dom.hud) {
                 this.dom.hud.classList.add('hidden');
+            }
+            if (this.dom.bgGame) {
+                this.dom.bgGame.classList.remove('active');
+            }
+            if (this.dom.bgFirTree) {
+                this.dom.bgFirTree.classList.remove('hidden');
             }
             if (this.dom.resultScreen) {
                 this.dom.resultScreen.classList.remove('hidden');

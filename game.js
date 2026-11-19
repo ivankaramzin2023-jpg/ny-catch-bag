@@ -215,6 +215,12 @@
         { src: 'assets/rules_card_6.webp', alt: 'Правило 6: Поймайте все блюда' }
     ];
 
+    // Предзагрузка всех карточек правил в кэш браузера (плавный переход без мерцания 1:1 как в Match 3)
+    RULES_DATA.forEach(r => {
+        const img = new Image();
+        img.src = r.src;
+    });
+
     // ----------------------------------------------------
     // ИГРОВОЙ ДВИЖОК ЛОВЛИ (CATCH ENGINE)
     // ----------------------------------------------------
@@ -1101,7 +1107,12 @@
 
             if (this.dom.rulesCardSlot) {
                 const existingImg = this.dom.rulesCardSlot.querySelector('.rules-card-img');
-                if (!existingImg || existingImg.getAttribute('src') !== data.src) {
+                if (existingImg) {
+                    if (existingImg.getAttribute('src') !== data.src) {
+                        existingImg.src = data.src;
+                        existingImg.alt = data.alt;
+                    }
+                } else {
                     this.dom.rulesCardSlot.innerHTML = `<img src="${data.src}" class="rules-card-img" alt="${data.alt}">`;
                 }
             }

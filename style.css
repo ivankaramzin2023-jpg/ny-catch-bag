@@ -681,6 +681,7 @@ html, body {
     pointer-events: none;
     user-select: none;
     display: block;
+    transition: opacity 0.15s ease-out;
 }
 
 .rules-pagination {

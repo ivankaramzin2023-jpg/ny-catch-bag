@@ -482,20 +482,27 @@ html, body {
 }
 
 .cover-santa {
-    max-width: min(390px, 92vw);
-    max-height: 100%;
+    max-width: min(440px, 96vw);
+    max-height: 108%;
     width: auto;
     height: auto;
     object-fit: contain;
     pointer-events: none;
     filter: drop-shadow(0 10px 24px rgba(10, 45, 90, 0.16));
-    animation: santaWalkFloat 3.6s ease-in-out infinite;
+    animation: coverSantaFloat 3.6s ease-in-out infinite;
+    transform-origin: center bottom;
+}
+
+@keyframes coverSantaFloat {
+    0%, 100% { transform: scale(1.14) translateY(0) rotate(0deg); }
+    30% { transform: scale(1.14) translateY(-6px) rotate(1.2deg); }
+    70% { transform: scale(1.14) translateY(-2px) rotate(-1deg); }
 }
 
 @keyframes santaWalkFloat {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    30% { transform: translateY(-6px) rotate(-1deg); }
-    70% { transform: translateY(-3px) rotate(1.2deg); }
+    30% { transform: translateY(-6px) rotate(1.2deg); }
+    70% { transform: translateY(-2px) rotate(-1deg); }
 }
 
 .cover-bottom-plate-box {

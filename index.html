@@ -8,7 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#7bb5e8">
     <title>Новогодняя Игра — Мешок Деда Мороза (LB Bonus)</title>
-    <link rel="stylesheet" href="style.css?v=3.8.0">
+    <link rel="stylesheet" href="style.css?v=3.9.0">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Oranienbaum&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,900&display=swap" media="print" onload="this.media='all'">
@@ -170,8 +170,8 @@
 
         <!-- SCREEN 5: Финальный экран (СПАСИБО ЗА ВИЗИТ! 1:1 ПО МАКЕТУ) -->
         <div id="finalScreen" class="final-screen-container hidden">
-            <!-- Аутентичный полноэкранный фон из Figma (небо + плашка + снежный склон) -->
-            <img src="assets/final_screen_bg.webp" class="final-screen-full-bg" alt="">
+            <!-- Аутентичный полноэкранный фон (небо) -->
+            <img src="assets/01_cover_bg.webp" class="final-screen-full-bg" alt="">
 
             <!-- Верхняя праздничная лента "СПАСИБО ЗА ВИЗИТ!" -->
             <div class="final-top-box">
@@ -186,15 +186,18 @@
                 </div>
             </div>
 
-            <!-- Информационный блок с текстами 1:1 и кнопкой "ВЫЙТИ" -->
-            <div class="final-content-box">
-                <div class="final-text-group">
-                    <img src="assets/final_heading.webp" class="final-heading-img" alt="Бонусы уже на карте лояльности! Ждем вас снова!">
-                    <img src="assets/final_subheading.webp" class="final-subheading-img" alt="Играйте и получайте бонусы. Каждый визит в ресторан открывает следующую игру">
+            <!-- Нижняя снежная плашка 1:1 с текстами и кнопкой "ВЫЙТИ" -->
+            <div class="final-bottom-plate-box">
+                <img src="assets/final_plate.webp" class="final-plate-bg" alt="Снежная плашка">
+                <div class="final-plate-content">
+                    <div class="final-text-group">
+                        <img src="assets/final_heading.webp" class="final-heading-img" alt="Бонусы уже на карте лояльности! Ждем вас снова!">
+                        <img src="assets/final_subheading.webp" class="final-subheading-img" alt="Играйте и получайте бонусы. Каждый визит в ресторан открывает следующую игру">
+                    </div>
+                    <button id="btnFinalExit" class="final-exit-btn" type="button" aria-label="ВЫЙТИ">
+                        <img src="assets/final_btn_exit.webp" class="final-btn-exit-img" alt="ВЫЙТИ">
+                    </button>
                 </div>
-                <button id="btnFinalExit" class="final-exit-btn" type="button" aria-label="ВЫЙТИ">
-                    <img src="assets/final_btn_exit.webp" class="final-btn-exit-img" alt="ВЫЙТИ">
-                </button>
             </div>
         </div>
     </div>

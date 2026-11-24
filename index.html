@@ -8,7 +8,45 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#7bb5e8">
     <title>Новогодняя Игра — Мешок Деда Мороза (LB Bonus)</title>
-    <link rel="stylesheet" href="style.css?v=4.6.0">
+    <!-- Telegram WebApp SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        (function() {
+            function updateAppHeight() {
+                var h = window.innerHeight;
+                if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.viewportHeight) {
+                    h = window.Telegram.WebApp.viewportHeight;
+                } else if (window.visualViewport && window.visualViewport.height) {
+                    h = window.visualViewport.height;
+                }
+                document.documentElement.style.setProperty('--app-height', h + 'px');
+                if (window.Telegram && window.Telegram.WebApp) {
+                    try {
+                        window.Telegram.WebApp.ready();
+                        window.Telegram.WebApp.expand();
+                    } catch(e) {}
+                }
+            }
+            updateAppHeight();
+            window.addEventListener('resize', updateAppHeight);
+            window.addEventListener('orientationchange', function() {
+                setTimeout(updateAppHeight, 50);
+                setTimeout(updateAppHeight, 150);
+                setTimeout(updateAppHeight, 400);
+            });
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', updateAppHeight);
+            }
+            if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.onEvent === 'function') {
+                try {
+                    window.Telegram.WebApp.onEvent('viewportChanged', updateAppHeight);
+                } catch(e) {}
+            }
+            document.addEventListener('DOMContentLoaded', updateAppHeight);
+            window.addEventListener('load', updateAppHeight);
+        })();
+    </script>
+    <link rel="stylesheet" href="style.css?v=4.9.0">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Oranienbaum&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,900&display=swap" media="print" onload="this.media='all'">
@@ -198,6 +236,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=4.6.0"></script>
+    <script src="game.js?v=4.9.0"></script>
 </body>
 </html>

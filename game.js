@@ -38,8 +38,9 @@
 
         resize() {
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            this.width = window.innerWidth;
-            this.height = window.innerHeight;
+            const container = document.getElementById('gameContainer');
+            this.width = container ? container.clientWidth : window.innerWidth;
+            this.height = container ? container.clientHeight : (window.visualViewport ? window.visualViewport.height : window.innerHeight);
             this.canvas.width = Math.round(this.width * dpr);
             this.canvas.height = Math.round(this.height * dpr);
             this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -110,8 +111,9 @@
 
         resize() {
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            this.width = window.innerWidth;
-            this.height = window.innerHeight;
+            const container = document.getElementById('gameContainer');
+            this.width = container ? container.clientWidth : window.innerWidth;
+            this.height = container ? container.clientHeight : (window.visualViewport ? window.visualViewport.height : window.innerHeight);
             this.canvas.width = Math.round(this.width * dpr);
             this.canvas.height = Math.round(this.height * dpr);
             this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -283,8 +285,9 @@
 
         resize() {
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            const clientW = window.innerWidth;
-            const clientH = window.innerHeight;
+            const container = document.getElementById('gameContainer');
+            const clientW = container ? container.clientWidth : window.innerWidth;
+            const clientH = container ? container.clientHeight : (window.visualViewport ? window.visualViewport.height : window.innerHeight);
 
             this.scale = clientW / this.baseWidth;
             this.virtualWidth = this.baseWidth;

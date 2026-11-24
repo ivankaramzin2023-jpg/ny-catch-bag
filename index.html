@@ -46,7 +46,7 @@
             window.addEventListener('load', updateAppHeight);
         })();
     </script>
-    <link rel="stylesheet" href="style.css?v=4.9.0">
+    <link rel="stylesheet" href="style.css?v=4.9.1">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Oranienbaum&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,900&display=swap" media="print" onload="this.media='all'">
@@ -195,14 +195,16 @@
                 </div>
             </div>
 
-            <!-- Нижний блок кнопок: Забрать бонусы + Попробовать еще раз -->
+            <!-- Нижний блок кнопок: Забрать бонусы + Попробовать еще раз (1:1 по структуре как в правилах) -->
             <div class="result-bottom-box">
-                <button id="btnClaimBonus" class="result-action-btn" type="button" aria-label="Забрать бонусы">
-                    <img src="assets/result_btn_claim.webp" class="result-btn-img" alt="Забрать бонусы">
-                </button>
-                <button id="btnRetryGame" class="result-action-btn" type="button" aria-label="Попробовать еще раз">
-                    <img src="assets/result_btn_retry.webp" class="result-btn-img" alt="Попробовать еще раз">
-                </button>
+                <div class="result-buttons-group">
+                    <button id="btnClaimBonus" class="result-action-btn result-btn-claim" type="button" aria-label="Забрать бонусы">
+                        <img src="assets/result_btn_claim.webp" class="result-btn-img" alt="Забрать бонусы">
+                    </button>
+                    <button id="btnRetryGame" class="result-action-btn result-btn-retry" type="button" aria-label="Попробовать еще раз">
+                        <img src="assets/result_btn_retry.webp" class="result-btn-img" alt="Попробовать еще раз">
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -236,6 +238,6 @@
         </div>
     </div>
 
-    <script src="game.js?v=4.9.0"></script>
+    <script src="game.js?v=4.9.1"></script>
 </body>
 </html>

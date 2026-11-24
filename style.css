@@ -925,10 +925,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0;
     z-index: 12;
     flex-shrink: 0;
+}
+
+.result-buttons-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
 }
 
 .result-action-btn {
@@ -941,20 +947,20 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: min(326px, 86vw);
     transition: transform 0.12s ease, filter 0.12s ease;
 }
 
+.result-btn-retry,
+.result-action-btn:nth-child(2) {
+    margin-top: -34px;
+}
+
 .result-btn-img {
-    width: 100%;
+    width: min(326px, 86vw);
     height: auto;
     object-fit: contain;
     display: block;
     pointer-events: none;
-}
-
-.result-btn-retry {
-    margin-top: -34px;
 }
 
 .result-action-btn:active {
@@ -1210,10 +1216,11 @@ body {
     .result-card-box {
         max-height: clamp(175px, 28vh, 240px);
     }
-    .result-action-btn {
-        width: min(295px, 80vw);
+    .result-btn-img {
+        width: min(300px, 82vw);
     }
-    .result-btn-retry {
+    .result-btn-retry,
+    .result-action-btn:nth-child(2) {
         margin-top: -30px;
     }
     .result-screen-container {
@@ -1289,10 +1296,11 @@ body {
     .result-stat-line {
         font-size: clamp(11.5px, 3.2vw, 13.5px);
     }
-    .result-action-btn {
+    .result-btn-img {
         width: min(270px, 76vw);
     }
-    .result-btn-retry {
+    .result-btn-retry,
+    .result-action-btn:nth-child(2) {
         margin-top: -26px;
     }
     .result-screen-container {

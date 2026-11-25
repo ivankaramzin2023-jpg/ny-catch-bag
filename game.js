@@ -214,7 +214,7 @@
         { src: 'assets/rules_card_3.webp', alt: 'Правило 3: Ловите перчик х2' },
         { src: 'assets/rules_card_4.webp', alt: 'Правило 4: Остерегайтесь препятствий' },
         { src: 'assets/rules_card_5.webp', alt: 'Правило 5: 1 сердце = 1 попытка' },
-        { src: 'assets/rules_card_6.webp', alt: 'Правило 6: Поймайте все блюда' }
+        { src: 'assets/rules_card_6.webp?v=5.1.0', alt: 'Правило 6: Поймайте все блюда' }
     ];
 
     // Предзагрузка всех карточек правил в кэш браузера (плавный переход без мерцания 1:1 как в Match 3)
@@ -336,6 +336,8 @@
         preloadAssets() {
             const list = {
                 basket: 'assets/player_basket.webp',
+                basket_half: 'assets/player_basket_half.webp?v=5.1.0',
+                basket_full: 'assets/player_basket_full.webp?v=5.1.0',
                 ramen: 'assets/food_ramen.webp',
                 dango: 'assets/food_dango.webp',
                 salmon: 'assets/food_salmon.webp',
@@ -582,12 +584,12 @@
                 this.itemsSinceLastIcicle = 0;
                 this.nextIcicleThreshold = 3 + Math.floor(Math.random() * 3); // 3, 4 или 5 предметов (на 15% чаще)
             } else if (isSanta) {
-                // Редкий падающий Дед Мороз (+50% баллов = 38 вместо 25)
+                // Редкий падающий Дед Мороз (+50% баллов = 60 вместо 40)
                 type = 'bonus';
                 subType = 'santa';
                 width = 86;
                 height = 56;
-                scoreVal = 38;
+                scoreVal = 60;
                 this.santaSpawnsCount++;
             } else {
                 // Шанс на бонус перчик x2 (около 7%)
@@ -599,16 +601,16 @@
                     height = 54;
                 } else {
                     type = 'food';
-                    // Крупные, сочные блюда по референсу (dango ~80px, ramen ~74px и т.д.)
+                    // Крупные, сочные блюда по референсу (1 пойманное блюдо = 40 баллов)
                     const foodTypes = [
-                        { key: 'ramen', w: 74, h: 74, score: 25 },
-                        { key: 'dango', w: 80, h: 65, score: 25 },
-                        { key: 'dimsum', w: 75, h: 67, score: 25 },
-                        { key: 'dimsum_flower', w: 76, h: 68, score: 25 },
-                        { key: 'salmon', w: 72, h: 64, score: 25 },
-                        { key: 'icecream', w: 64, h: 72, score: 25 },
-                        { key: 'bao', w: 76, h: 62, score: 25 },
-                        { key: 'onigiri', w: 74, h: 66, score: 25 }
+                        { key: 'ramen', w: 74, h: 74, score: 40 },
+                        { key: 'dango', w: 80, h: 65, score: 40 },
+                        { key: 'dimsum', w: 75, h: 67, score: 40 },
+                        { key: 'dimsum_flower', w: 76, h: 68, score: 40 },
+                        { key: 'salmon', w: 72, h: 64, score: 40 },
+                        { key: 'icecream', w: 64, h: 72, score: 40 },
+                        { key: 'bao', w: 76, h: 62, score: 40 },
+                        { key: 'onigiri', w: 74, h: 66, score: 40 }
                     ];
                     const chosen = foodTypes[Math.floor(Math.random() * foodTypes.length)];
                     subType = chosen.key;
@@ -865,9 +867,21 @@
                 this.ctx.globalAlpha = Math.floor(Date.now() / 80) % 2 === 0 ? 0.35 : 0.9;
             }
 
-            const basketImg = this.images.basket;
+            // Выбор стейта мешка в зависимости от набранных баллов (до 1/3 пустой, до 2/3 полузаполненный, далее полный)
+            let basketImg = this.images.basket;
+            if (this.score >= (this.maxScore * 2) / 3 && this.images.basket_full && this.images.basket_full.complete) {
+                basketImg = this.images.basket_full;
+            } else if (this.score >= this.maxScore / 3 && this.images.basket_half && this.images.basket_half.complete) {
+                basketImg = this.images.basket_half;
+            }
+
             if (basketImg && basketImg.complete) {
-                this.ctx.drawImage(basketImg, -this.player.width / 2, -this.player.height / 2, this.player.width, this.player.height);
+                const drawW = this.player.width;
+                const drawH = (basketImg.naturalWidth > 0)
+                    ? (basketImg.naturalHeight / basketImg.naturalWidth) * drawW
+                    : this.player.height;
+                const drawY = (this.player.height / 2) - drawH;
+                this.ctx.drawImage(basketImg, -drawW / 2, drawY, drawW, drawH);
             } else {
                 this.ctx.fillStyle = '#D62828';
                 this.ctx.fillRect(-this.player.width / 2, -this.player.height / 2, this.player.width, this.player.height);

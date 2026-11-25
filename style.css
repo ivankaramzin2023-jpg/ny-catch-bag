@@ -437,9 +437,7 @@ html, body {
     z-index: 6;
     flex-shrink: 0;
     pointer-events: none;
-    overflow: hidden;
-    border-radius: 0 0 36px 36px;
-    box-shadow: 0 6px 18px rgba(10, 45, 90, 0.14);
+    overflow: visible;
 }
 
 .cover-ribbon-banner {
@@ -451,6 +449,7 @@ html, body {
     display: block;
     flex-shrink: 0;
     pointer-events: none;
+    filter: drop-shadow(0 6px 16px rgba(10, 45, 90, 0.16));
 }
 
 .cover-santa-wrapper {
@@ -647,9 +646,7 @@ html, body {
     z-index: 11;
     flex-shrink: 0;
     pointer-events: none;
-    overflow: hidden;
-    border-radius: 0 0 36px 36px;
-    box-shadow: 0 6px 18px rgba(10, 45, 90, 0.14);
+    overflow: visible;
 }
 
 .rules-ribbon-banner {
@@ -661,6 +658,7 @@ html, body {
     display: block;
     flex-shrink: 0;
     pointer-events: none;
+    filter: drop-shadow(0 6px 16px rgba(10, 45, 90, 0.16));
 }
 
 .rules-card-container {
@@ -809,9 +807,7 @@ html, body {
     flex-shrink: 0;
     pointer-events: none;
     z-index: 12;
-    overflow: hidden;
-    border-radius: 0 0 36px 36px;
-    box-shadow: 0 6px 18px rgba(10, 45, 90, 0.14);
+    overflow: visible;
 }
 
 .result-ribbon-banner {
@@ -821,6 +817,7 @@ html, body {
     object-fit: cover;
     object-position: center bottom;
     display: block;
+    filter: drop-shadow(0 6px 16px rgba(10, 45, 90, 0.16));
 }
 
 /* Центральная плашка */
@@ -986,9 +983,7 @@ html, body {
     padding-top: 0;
     z-index: 10;
     pointer-events: none;
-    overflow: hidden;
-    border-radius: 0 0 36px 36px;
-    box-shadow: 0 6px 18px rgba(10, 45, 90, 0.14);
+    overflow: visible;
 }
 
 .exit-ribbon-banner {
@@ -998,6 +993,7 @@ html, body {
     object-fit: cover;
     object-position: center bottom;
     display: block;
+    filter: drop-shadow(0 6px 16px rgba(10, 45, 90, 0.16));
 }
 
 .exit-santa-wrapper {
